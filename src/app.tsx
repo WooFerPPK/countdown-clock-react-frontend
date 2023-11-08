@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import AppRoutes from './routes';
 import { NotificationProvider } from '@/contexts/NotificationContext/NotificationContext';
 import NotificationDisplay from '@/components/NotificationDisplay/NotificationDisplay';
+import '@/assets/styles/global.scss';
 
 // Create the root for concurrent mode.
 const rootElement = document.getElementById('root');
