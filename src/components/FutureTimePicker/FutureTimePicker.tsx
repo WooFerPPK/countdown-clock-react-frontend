@@ -4,6 +4,7 @@ import { FutureTimePickerProps } from './FutureTimePickerProps';
 const FutureTimePicker: React.FC<FutureTimePickerProps> = ({ minTimeMillis, onSelect, onError }) => {
   const [selectedDateTime, setSelectedDateTime] = useState<string>('');
   const [timeError, setTimeError] = useState<string | null>(null);
+  const [minDateTimeLocalString, setMinDateTimeLocalString] = useState<string>('');
 
   const toLocalDateTimeString = (millis: number) => {
     const date = new Date(millis);
@@ -13,18 +14,16 @@ const FutureTimePicker: React.FC<FutureTimePickerProps> = ({ minTimeMillis, onSe
     const hours = String(date.getHours()).padStart(2, '0');
     const minutes = String(date.getMinutes()).padStart(2, '0');
     const seconds = String(date.getSeconds()).padStart(2, '0');
-  
     return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
   };
-  
-  const minDateTimeLocalString = toLocalDateTimeString(minTimeMillis);
 
   useEffect(() => {
-    if (!selectedDateTime) {
-      setSelectedDateTime(minDateTimeLocalString);
+    if (minTimeMillis) {
+      const minDateTime = toLocalDateTimeString(minTimeMillis);
+      setMinDateTimeLocalString(minDateTime);
+      setSelectedDateTime(minDateTime);  // Update selectedDateTime based on new minTimeMillis
     }
-  }, [minDateTimeLocalString, selectedDateTime]);
-  
+  }, [minTimeMillis]);
 
   useEffect(() => {
     onError(!!timeError);
@@ -40,7 +39,7 @@ const FutureTimePicker: React.FC<FutureTimePickerProps> = ({ minTimeMillis, onSe
       setTimeError('You cannot select a time in the past.');
     }
   };
-  
+
   return (
     <>
       <input

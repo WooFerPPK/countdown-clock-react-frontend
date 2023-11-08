@@ -17,6 +17,7 @@ const ClockPage: React.FC = () => {
   // Get clock data
   const { data: clock, error: clockError, loading: clockLoading, fetchClock } = useGetClockById(clockId);
 
+  // Sync time with the backend
   const [endTime, setEndTime] = useState(0);
 
   const [paused, setPaused] = useState(false);

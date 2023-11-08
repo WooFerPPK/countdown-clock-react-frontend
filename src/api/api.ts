@@ -28,6 +28,9 @@ export const pauseClock = async (params: {clockId: string, token: string, paused
   return await fetchData({url: `keyholder/clocks/${params.clockId}/pause`, headers: {"Authorization": `Bearer ${params.token}`}, method: 'PUT', body: {pause: !params.paused}});
 };
 
+export const deleteClock = async (params: {clockId: string, token: string}) => {
+  return await fetchData({url: `keyholder/clocks/${params.clockId}`, headers: {"Authorization": `Bearer ${params.token}`}, method: 'DELETE'});
+};
 
 export const createNewClock = async (params: { endTime: number, description: string, username: string, password: string })=> {
   return await fetchData({ url: 'clocks', method: 'POST', body: params });
