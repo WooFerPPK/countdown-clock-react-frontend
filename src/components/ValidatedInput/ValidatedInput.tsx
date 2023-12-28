@@ -9,7 +9,7 @@ const ValidatedInput: React.FC<ValidatedInputProps> = ({ error, ...inputProps })
   return (
     <>
       <Input {...inputProps} className={combinedClassName} />
-      {error && <p className="error-message">{error}</p>}
+      {error && <span className="error-message">{error}</span>}
     </>
   );
 };

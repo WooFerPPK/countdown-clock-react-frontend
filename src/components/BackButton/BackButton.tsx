@@ -21,7 +21,7 @@ const BackButton: React.FC<BackButtonProps> = ({ hide, backRoute }) => {
     }
   };
 
-  return <Button label='Go Back' onClick={handleGoBack} />;
+  return <Button className='backButton' label='Go Back' onClick={handleGoBack} />;
 };
 
 export default BackButton;

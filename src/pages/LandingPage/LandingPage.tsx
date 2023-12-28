@@ -29,7 +29,7 @@ const LandingPage: React.FC = () => {
   return (
     <Layout>
       <ClocksList clocks={clocks} loading={clocksLoading} error={clocksError} />
-      <Button onClick={navigateToCreateClock}>Create Clock</Button>
+      <Button className='full-width' onClick={navigateToCreateClock}>Create Clock</Button>
     </Layout>
   );
 };

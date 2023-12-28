@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ButtonProps } from './ButtonTypes';
 import './Button.scss';
 
-const Button: React.FC<ButtonProps> = ({ label, children, onClick, disabled = false, holdTime }) => {
+const Button: React.FC<ButtonProps> = ({ label, children, onClick, disabled = false, holdTime, className = ''}) => {
   const [holding, setHolding] = useState(false);
   const [holdStartTime, setHoldStartTime] = useState(null);
 
@@ -32,9 +32,11 @@ const Button: React.FC<ButtonProps> = ({ label, children, onClick, disabled = fa
     }
   };
   const buttonStyle = holding && holdTime ? { transitionDuration: `${holdTime}ms` } : {};
+  const buttonClassName = `${holding ? 'growing-button ' : ''}${className}`;
+
   return (
     <button
-      className={holding ? 'growing-button' : ''}
+      className={buttonClassName}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}

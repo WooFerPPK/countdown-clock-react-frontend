@@ -3,5 +3,7 @@ export interface Clock {
   description: string,
   endTime: number,
   paused: boolean,
-  remainingTime: number
+  remainingTime: number,
+  pretty: string,
+  clockId: string
 }

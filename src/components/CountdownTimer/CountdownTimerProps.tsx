@@ -1,5 +1,6 @@
+import { Clock } from '@/interfaces/Clock';
+
 export interface CountdownTimerProps {
-  endTime: number,
   paused?: boolean,
-  clock?: {}
+  clock: Clock
 }

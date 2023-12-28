@@ -4,7 +4,6 @@ import Layout from '@/components/Layout/Layout';
 import FutureTimePicker from '@/components/FutureTimePicker/FutureTimePicker';
 import Button from '@/components/Button/Button';
 import ValidatedInput from '@/components/ValidatedInput/ValidatedInput';
-import Input from '@/components/Input/Input';
 import { useCreateNewClock } from '@/hooks/useCreateNewClock';
 import useNotification from '@/hooks/useNotification';
 
@@ -15,6 +14,7 @@ const ClockCreate: React.FC = () => {
   const [password, setPassword] = useState<string>('');
   const [timePickerError, setTimePickerError] = useState(false);
   const [clockNameError, setClockNameError] = useState<string | null>(null);
+  const [usernameError, setUsernameError] = useState<string | null>(null);
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const { createClock, loading, error, success } = useCreateNewClock();
   const { showSuccess, showError } = useNotification();
@@ -28,6 +28,15 @@ const ClockCreate: React.FC = () => {
   const handleTimePickerError = (hasError: boolean) => {
     setTimePickerError(hasError);
   };
+
+  const handleUsernameChange = (newUsername: string) => {
+    setUsername(newUsername);
+    if (newUsername === '' || newUsername === null) {
+      setUsernameError('Username cannot be empty');
+    } else {
+      setUsernameError(null);
+    }
+  };  
 
   const handlePasswordChange = (newPassword: string) => {
     setPassword(newPassword);
@@ -47,7 +56,7 @@ const ClockCreate: React.FC = () => {
     }
   };
 
-  const isSubmitDisabled = !!clockNameError || !!passwordError || timePickerError;
+  const isSubmitDisabled = !!clockNameError || !!usernameError || !!passwordError || timePickerError;
 
   const handleSubmit = async () => {
     const payload = {
@@ -66,6 +75,10 @@ const ClockCreate: React.FC = () => {
   };
 
   useEffect(() => {
+    if (username === '') {
+      setUsernameError('Username cannot be empty');
+    }
+
     if (password === '') {
       setPasswordError('Password cannot be empty');
     }
@@ -89,25 +102,29 @@ const ClockCreate: React.FC = () => {
   }, [success, error]);
 
   return (
-    <Layout>
-      <div>
+    <Layout className='page create'>
+      <header>
+        <h1>New Clock</h1>
+      </header>
+      <div className='item'>
         <label>End Time</label>
         <FutureTimePicker minTimeMillis={Date.now()} onSelect={handleTimePicker} onError={handleTimePickerError} />
       </div>
-      <div>
+      <div className='item'>
         <label>Clock Name</label>
         <ValidatedInput className="clockName" type='text' onChange={handleClockNameChange} error={clockNameError}/>
       </div>
-      <div>
+      <div className='item'>
         <label>Username</label>
-        <Input className="username" type='text' onChange={setUsername} />
+        <ValidatedInput className="username" type='text' onChange={handleUsernameChange} error={usernameError}/>
       </div>
-      <div>
+      <div className='item'>
         <label>Password</label>
         <ValidatedInput className="password" type='password' onChange={handlePasswordChange} error={passwordError}/>
       </div>
-      
-      <Button onClick={handleSubmit} disabled={isSubmitDisabled || loading} >Create</Button>
+      <div className='buttons'>
+        <Button className='full-width' onClick={handleSubmit} disabled={isSubmitDisabled || loading}>Create Clock</Button>
+      </div>
     </Layout>
   );
 };

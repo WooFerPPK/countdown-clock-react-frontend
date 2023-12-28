@@ -7,6 +7,9 @@ export const useGetClockById = (id: string) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  // Explicitly type intervalId as number or null
+  let intervalId: any = null; 
+
   const fetchClock = useCallback(async () => {
     setLoading(true);
     try {
@@ -22,10 +25,20 @@ export const useGetClockById = (id: string) => {
   useEffect(() => {
     fetchClock();
 
-    const intervalId = setInterval(() => fetchClock(), 10000);
+    // Set up the interval and store its ID
+    intervalId = setInterval(() => fetchClock(), 1000);
 
-    return () => clearInterval(intervalId);
+    // Cleanup function to clear the interval
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
   }, [fetchClock]);
 
-  return { data, error, loading, fetchClock };
+  // Define stopFetching function using intervalId
+  const stopFetching = () => {
+    if (intervalId) clearInterval(intervalId);
+  };
+
+  // Return all necessary states and functions
+  return { data, error, loading, fetchClock, stopFetching };
 };

@@ -38,7 +38,7 @@ const ClocksList: React.FC<ClocksListProps> = ({ clocks, loading, error }) => {
                   <RowButtonLiink to={`/clock/${clock._id}`}>
                     {clock.description}
                   </RowButtonLiink>
-                  <CountdownTimer endTime={clock.endTime} />
+                  <CountdownTimer clock={clock} />
                 </li>
               ))}
             </ul>

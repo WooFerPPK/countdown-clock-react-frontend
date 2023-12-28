@@ -15,7 +15,7 @@ const ClockPage: React.FC = () => {
   const [token, setToken] = useState(localStorage.getItem(`token_${clockId}`));
 
   // Get clock data
-  const { data: clock, error: clockError, loading: clockLoading, fetchClock } = useGetClockById(clockId);
+  const { data: clock, error: clockError, loading: clockLoading, fetchClock, stopFetching } = useGetClockById(clockId);
 
   // Sync time with the backend
   const [endTime, setEndTime] = useState(0);
@@ -33,7 +33,8 @@ const ClockPage: React.FC = () => {
         setPaused(clock.paused);
       }
     }
-  }, [clock]);
+
+  }, [clock, stopFetching]);
 
   useEffect(() => {
     // Check to see if clock is paused, and then calls to get the most accurate time from the backend.
@@ -55,8 +56,13 @@ const ClockPage: React.FC = () => {
     <Layout backRoute="/">
       {clock ? (
         <>
+          <header>
+            <h1>
+              {clock.description}
+            </h1>
+          </header>
           <div>
-            <CountdownTimer endTime={endTime} paused={paused} clock={clock}/>
+            <CountdownTimer paused={paused} clock={clock}/>
           </div>
           <div>
             {verifiedLoading ? (
@@ -73,7 +79,7 @@ const ClockPage: React.FC = () => {
           (
             <p>Loading Clock Data</p>
           ) : (
-            <p>Could not Clock Data</p>
+            <p>No Clocks Found.</p>
           ) 
       )}
 

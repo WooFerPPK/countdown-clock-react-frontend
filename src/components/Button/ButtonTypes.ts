@@ -5,5 +5,6 @@ export interface ButtonProps {
   onClick?: MouseEventHandler<HTMLButtonElement>,
   disabled?: boolean,
   children?: React.ReactNode,
-  holdTime?: number
+  holdTime?: number,
+  className?: string
 }
