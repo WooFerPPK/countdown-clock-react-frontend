@@ -1,0 +1,62 @@
+.adminbuttons {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2em;
+    .dropdown {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 2em;
+        select {
+            width: 100%;
+            margin: 0 8px;
+        }
+    }
+    .futuretime {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 2em;
+        input {
+            width: 100%;
+            margin-right: 8px;
+        }
+        button {
+            white-space: nowrap;
+        }
+    }
+    .pause {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-bottom: 2em;
+    }
+    .delete {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        .modal {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: rgba(255, 255, 255, 0.5);
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            .content {
+                background-color: #fff;
+                border: 1px solid;
+                padding: 16px;
+                display: flex;
+                flex-direction: column;
+                .buttons {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                }
+            }
+        }
+    }
+}

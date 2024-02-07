@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNotificationContext } from '@/contexts/NotificationContext/NotificationContext';
+import './NotificationDisplay.scss';
 
 interface NotificationProps {
   id: number,

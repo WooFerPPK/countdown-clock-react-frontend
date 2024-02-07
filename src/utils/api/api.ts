@@ -1,12 +1,8 @@
 import { FetchProps, FetchOptions } from './apiTypes';
 
-const host = 'http://localhost';
-const port = '4001';
-
 const fetchData = async ({url, method, headers, body, query}: FetchProps) => {
     
-    let fullUrl = `${host}:${port}/${url}`;
-    // let fullUrl = `/api/${url}`;
+    let fullUrl = `/api/${url}`;
     
     if (query) {
         const queryString = new URLSearchParams(query).toString();

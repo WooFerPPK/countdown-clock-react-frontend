@@ -3,6 +3,7 @@ import Input from '../Input/Input';
 import Button from '../Button/Button';
 import useNotification from '@/hooks/useNotification';
 import { authenticate } from '@/api/api';
+import './PasswordForm.scss';
 
 interface PasswordFormProps {
   clockId: string,
@@ -29,8 +30,9 @@ const PasswordForm: React.FC<PasswordFormProps> = ({ clockId, onSubmitSuccess })
   };
 
   return (
-    <div>
+    <div className='password-form'>
       <label>Password</label>
+      <div className='password-fields'>
       <Input 
         type="password"
         value={password}
@@ -39,6 +41,7 @@ const PasswordForm: React.FC<PasswordFormProps> = ({ clockId, onSubmitSuccess })
       <Button onClick={handleSubmit} disabled={loading}>
         Submit
       </Button>
+      </div>
     </div>
   );
 };

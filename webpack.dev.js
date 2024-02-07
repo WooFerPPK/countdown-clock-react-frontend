@@ -8,6 +8,18 @@ module.exports = merge(baseConfig, {
         static: path.join(__dirname, 'public'),
         port: 8080,
         historyApiFallback: true,
-        hot: true
+        hot: true,
+        publicPath: '/',
+        proxy: {
+            '/api': {
+                target: ' ',
+                changeOrigin: true,
+                pathRewrite: { '^/api': '' },
+                secure: false,
+                headers: {
+                    Connection: 'keep-alive'
+                },
+            },
+        },
     },
 });

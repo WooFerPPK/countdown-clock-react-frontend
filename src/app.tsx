@@ -15,8 +15,8 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <NotificationProvider>
-        <AppRoutes />
         <NotificationDisplay />
+        <AppRoutes />
       </NotificationProvider>
     </BrowserRouter>
   );

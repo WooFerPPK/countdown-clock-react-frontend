@@ -5,6 +5,7 @@ import Button from '../Button/Button';
 import { addTime, subtractTime, pauseClock, deleteClock } from '@/api/api';
 import useNotification from '@/hooks/useNotification';
 import { useLocation, useNavigate } from 'react-router-dom';
+import './AdminButtons.scss';
 
 interface AdminButtonsProps {
   endTime: number,
@@ -76,26 +77,30 @@ const AdminButtons: React.FC<AdminButtonsProps> = ({endTime, paused, clockId, to
   }
 
   return (
-    <div>
-      <div>
+    <div className='adminbuttons'>
+      <div className='dropdown'>
         <Button onClick={subtract} disabled={time == null} >Subtract</Button>
         <TimeDropdown onChange={handleTimeDropdownSelect} />
         <Button onClick={add} disabled={time == null}>Add</Button>
       </div>
-      <div>
+      <div className='futuretime'>
         <FutureTimePicker onSelect={handleFutureTimePickerSelect} onError={() => {}} minTimeMillis={endTime}/>
         <Button onClick={submitFutureTime}>Set Time</Button>
       </div>
-      <div>
-        <Button onClick={togglePause}>{paused ? 'Resume' : 'Pause'}</Button>
+      <div className='pause'>
+        <Button onClick={togglePause}>{paused ? 'Resume Timer' : 'Pause Timer'}</Button>
       </div>
-      <div>
+      <div className='delete'>
         <Button onClick={() => setShowDeleteConfirmation(true)}>Delete</Button>
         {showDeleteConfirmation && (
-          <div>
+          <div className='modal'>
+            <div className='content'>
             <p>Are you sure you want to delete?</p>
-            <Button onClick={confirmDelete} holdTime={1000}>Yes</Button>
-            <Button onClick={() => setShowDeleteConfirmation(false)}>No</Button>
+              <div className='buttons'>
+                <Button onClick={confirmDelete}>Yes</Button>
+                <Button onClick={() => setShowDeleteConfirmation(false)}>No</Button>
+              </div>
+            </div>
           </div>
         )}
       </div>
